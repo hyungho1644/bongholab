@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>무료 뽀모도로 타이머 — 백색소음 집중 타이머 | BonghoLab</title>
+    <meta name="description" content="설치 없이 바로 쓰는 무료 뽀모도로 타이머. 빗소리, 카페, 포레스트 백색소음으로 집중력을 높여보세요.">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body data-theme="dark" class="timer-page">
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">Bongho<span>Lab</span></a>
+        <ul class="nav-menu">
+            <li><a href="../index.html">블로그</a></li>
+            <li><a href="timer.html" class="active">타이머</a></li>
+            <li><a href="../about.html">소개</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="timer-container">
+    <div class="timer-header">
+        <h1>Focus Timer</h1>
+        <div class="timer-controls-top">
+            <select id="theme-selector" title="디자인 테마 선택">
+                <option value="dark">🌙 다크 앤 시크</option>
+                <option value="light">☀️ 라이트 앤 클린</option>
+                <option value="cafe">☕ 우드 앤 카페</option>
+                <option value="forest">🌲 포레스트 힐링</option>
+            </select>
+            <button id="settings-btn" class="secondary-btn" style="padding:10px 20px; font-size:0.9rem; flex:none; border-radius:8px;">⚙️ 시간 설정</button>
+        </div>
+    </div>
+
+    <main class="timer-card">
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="work">집중 +5분</button>
+            <button class="mode-btn" data-mode="break">휴식 +5분</button>
+        </div>
+        <div class="timer-display">
+            <span id="minutes">10</span><span class="colon">:</span><span id="seconds">00</span>
+        </div>
+        <div class="timer-controls-bottom">
+            <button id="reset-btn" class="primary-btn">초기화</button>
+            <button id="repeat-btn" class="primary-btn">자동반복: OFF</button>
+            <button id="start-btn" class="primary-btn">시작</button>
+        </div>
+    </main>
+
+    <footer class="timer-footer">
+        <p>Made with ❤️ by BonghoLab &nbsp;|&nbsp;
+           <a href="../privacy.html">개인정보처리방침</a> &nbsp;|&nbsp;
+           <a href="../index.html">← 블로그 홈</a>
+        </p>
+    </footer>
+</div>
+
+<audio id="start-sound" src="https://actions.google.com/sounds/v1/water/water_drop.ogg" preload="auto"></audio>
+<audio id="end-sound" src="https://upload.wikimedia.org/wikipedia/commons/2/23/Tibetan_bowl.ogg" preload="auto"></audio>
+
+<div id="settings-modal" class="modal-overlay">
+    <div class="modal-card">
+        <h2>타이머 시간 설정</h2>
+        <div class="setting-group">
+            <label for="work-time-input">집중 시간 (분)</label>
+            <input type="number" id="work-time-input" min="1" max="120" value="10">
+        </div>
+        <div class="setting-group">
+            <label for="break-time-input">휴식 시간 (분)</label>
+            <input type="number" id="break-time-input" min="1" max="30" value="5">
+        </div>
+        <div class="modal-actions">
+            <button id="save-settings-btn" class="primary-btn">저장</button>
+            <button id="close-settings-btn" class="secondary-btn">취소</button>
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
