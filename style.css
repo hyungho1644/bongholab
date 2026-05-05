@@ -176,17 +176,6 @@ select:hover {
     align-items: center;
 }
 
-#minutes, #seconds {
-    cursor: ns-resize;
-    user-select: none;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-#minutes:hover, #seconds:hover {
-    color: var(--accent);
-    text-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
-}
-
 .colon {
     margin: 0 5px;
     animation: blink 1s infinite;

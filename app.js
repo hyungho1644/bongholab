@@ -84,10 +84,8 @@ function resetTimer() {
     pauseTimer();
     
     if (currentMode === 'work') {
-        WORK_TIME = 10 * 60;
         timeLeft = WORK_TIME;
     } else {
-        BREAK_TIME = 5 * 60;
         timeLeft = BREAK_TIME;
     }
     
@@ -190,48 +188,6 @@ modeBtns.forEach(btn => {
         }
     });
 });
-
-// 마우스 휠로 시간 조절하는 기능
-minutesDisplay.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    if (isRunning) return;
-    let change = e.deltaY < 0 ? 60 : -60; // 위로 스크롤 시 1분(60초) 증가
-    adjustTimeOnScroll(change);
-});
-
-secondsDisplay.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    if (isRunning) return;
-    let change = e.deltaY < 0 ? 1 : -1; // 위로 스크롤 시 1초 증가
-    adjustTimeOnScroll(change);
-});
-
-function adjustTimeOnScroll(secondsToAdd) {
-    let newTimeLeft = timeLeft + secondsToAdd;
-    
-    // 최소 1초 유지
-    if (newTimeLeft < 1) {
-        newTimeLeft = 1;
-    }
-    
-    // 최대 시간 제한
-    if (currentMode === 'work' && newTimeLeft > MAX_WORK_TIME) {
-        newTimeLeft = MAX_WORK_TIME;
-    } else if (currentMode === 'break' && newTimeLeft > MAX_BREAK_TIME) {
-        newTimeLeft = MAX_BREAK_TIME;
-    }
-
-    // 변경된 시간을 베이스 설정 시간(WORK_TIME/BREAK_TIME)에도 반영
-    let diff = newTimeLeft - timeLeft;
-    if (currentMode === 'work') {
-        WORK_TIME += diff;
-    } else {
-        BREAK_TIME += diff;
-    }
-    
-    timeLeft = newTimeLeft;
-    updateDisplay();
-}
 
 // --- 설정 모달 로직 ---
 settingsBtn.addEventListener('click', () => {
