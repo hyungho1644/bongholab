@@ -31,36 +31,21 @@
     <div class="container">
         <header>
             <h1>Focus Timer</h1>
-            <div class="controls-top">
-                <select id="theme-selector" title="디자인 테마 선택">
+            <div class="controls-top" style="justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <select id="theme-selector" title="디자인 테마 선택" style="max-width: 200px;">
                     <option value="dark">🌙 다크 앤 시크</option>
                     <option value="light">☀️ 라이트 앤 클린</option>
                     <option value="cafe">☕ 우드 앤 카페</option>
                     <option value="forest">🌲 포레스트 힐링</option>
                 </select>
-                <select id="sound-selector" title="배경 소리 선택">
-                    <option value="none">🔇 소리 없음</option>
-                    <option value="rain">🌧️ 잔잔한 빗소리</option>
-                    <option value="cafe">☕ 백색소음 (카페)</option>
-                    <option value="fire">🔥 장작 타는 소리</option>
-                    <option value="jazz">🎷 부드러운 재즈</option>
-                </select>
+                <button id="settings-btn" class="secondary-btn" style="padding: 10px 20px; font-size: 0.9rem; flex: none;">⚙️ 시간 설정</button>
             </div>
         </header>
 
-        <!-- 상단 애드센스 광고 영역 (나중에 여기에 구글 애드센스 스크립트를 넣습니다) -->
-        <div class="adsense-banner top-ad">
-            <span>[광고] 구글 애드센스 배너 (상단)</span>
-        </div>
-
         <main class="timer-card">
             <div class="mode-selector">
-                <button class="mode-btn active" data-mode="work">집중 10분</button>
-                <button class="mode-btn" data-mode="break">휴식 5분</button>
-            </div>
-            <div class="time-adjusters" style="display: flex; gap: 10px; margin-bottom: -15px;">
-                <button class="adjust-btn" data-add="5">+5분</button>
-                <button class="adjust-btn" data-add="10">+10분</button>
+                <button class="mode-btn active" data-mode="work">집중 +5분</button>
+                <button class="mode-btn" data-mode="break">휴식 +5분</button>
             </div>
             <div class="timer-display">
                 <span id="minutes">10</span><span class="colon">:</span><span id="seconds">00</span>
@@ -72,25 +57,34 @@
             </div>
         </main>
         
-        <!-- 하단 애드센스 광고 영역 (나중에 여기에 구글 애드센스 스크립트를 넣습니다) -->
-        <div class="adsense-banner bottom-ad">
-            <span>[광고] 구글 애드센스 배너 (하단)</span>
-        </div>
-
         <footer>
-            <p>Made with ❤️ by Hyung | <a href="privacy.html" class="privacy-link">개인정보처리방침</a></p>
+            <p>Made with ❤️ by Bong | <a href="privacy.html" class="privacy-link">개인정보처리방침</a></p>
         </footer>
     </div>
     
     <!-- Audio Elements for Background Sounds -->
-    <!-- 참고: 데모용으로 Pixabay 무료 오디오 URL을 사용합니다. -->
     <!-- 효과음 오디오 엘리먼트 (차분한 사운드) -->
     <audio id="start-sound" src="https://actions.google.com/sounds/v1/water/water_drop.ogg" preload="auto"></audio>
     <audio id="end-sound" src="https://upload.wikimedia.org/wikipedia/commons/2/23/Tibetan_bowl.ogg" preload="auto"></audio>
-    <audio id="audio-rain" loop src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c1539c.mp3?filename=heavy-rain-nature-sounds-8186.mp3"></audio>
-    <audio id="audio-cafe" loop src="https://cdn.pixabay.com/download/audio/2022/11/04/audio_3d12d4d8ce.mp3?filename=cafe-ambience-2-125010.mp3"></audio>
-    <audio id="audio-fire" loop src="https://cdn.pixabay.com/download/audio/2022/03/09/audio_82e6dff987.mp3?filename=fireplace-sound-14811.mp3"></audio>
-    <audio id="audio-jazz" loop src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=lounge-music-113593.mp3"></audio>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-card">
+            <h2>타이머 시간 설정</h2>
+            <div class="setting-group">
+                <label for="work-time-input">집중 시간 (분)</label>
+                <input type="number" id="work-time-input" min="1" max="120" value="10">
+            </div>
+            <div class="setting-group">
+                <label for="break-time-input">휴식 시간 (분)</label>
+                <input type="number" id="break-time-input" min="1" max="30" value="5">
+            </div>
+            <div class="modal-actions">
+                <button id="save-settings-btn" class="primary-btn">저장</button>
+                <button id="close-settings-btn" class="secondary-btn">취소</button>
+            </div>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>

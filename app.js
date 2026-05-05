@@ -17,17 +17,17 @@ const startBtn = document.getElementById('start-btn');
 const resetBtn = document.getElementById('reset-btn');
 const repeatBtn = document.getElementById('repeat-btn');
 const modeBtns = document.querySelectorAll('.mode-btn');
-const adjustBtns = document.querySelectorAll('.adjust-btn');
 const themeSelector = document.getElementById('theme-selector');
-const soundSelector = document.getElementById('sound-selector');
 
-// 오디오 엘리먼트 맵핑
-const audios = {
-    rain: document.getElementById('audio-rain'),
-    cafe: document.getElementById('audio-cafe'),
-    fire: document.getElementById('audio-fire'),
-    jazz: document.getElementById('audio-jazz')
-};
+// 모달 및 설정 관련 엘리먼트
+const settingsBtn = document.getElementById('settings-btn');
+const settingsModal = document.getElementById('settings-modal');
+const saveSettingsBtn = document.getElementById('save-settings-btn');
+const closeSettingsBtn = document.getElementById('close-settings-btn');
+const workTimeInput = document.getElementById('work-time-input');
+const breakTimeInput = document.getElementById('break-time-input');
+
+// 효과음 오디오 엘리먼트
 const startSound = document.getElementById('start-sound');
 const endSound = document.getElementById('end-sound');
 
@@ -70,8 +70,6 @@ function startTimer() {
             handleTimerComplete();
         }
     }, 1000);
-    
-    playSelectedSound();
 }
 
 // 타이머 일시정지
@@ -79,7 +77,6 @@ function pauseTimer() {
     isRunning = false;
     startBtn.textContent = '시작';
     clearInterval(timerInterval);
-    stopAllSounds();
 }
 
 // 타이머 초기화
@@ -89,11 +86,9 @@ function resetTimer() {
     if (currentMode === 'work') {
         WORK_TIME = 10 * 60;
         timeLeft = WORK_TIME;
-        document.querySelector('.mode-btn[data-mode="work"]').textContent = `집중 10분`;
     } else {
         BREAK_TIME = 5 * 60;
         timeLeft = BREAK_TIME;
-        document.querySelector('.mode-btn[data-mode="break"]').textContent = `휴식 5분`;
     }
     
     updateDisplay();
@@ -110,9 +105,9 @@ function handleTimerComplete() {
     // 자동 반복이 꺼져있을 때만 브라우저 알림창 표시 (켜져있으면 흐름이 끊기지 않게 바로 넘어감)
     if (!isAutoRepeat) {
         if(currentMode === 'work') {
-            alert('집중 시간이 끝났습니다! 코다리가 박수 쳐드립니다! 👏 잠시 휴식을 취하세요.');
+            alert('집중 시간이 끝났습니다! 잠시 휴식을 취하세요.');
         } else {
-            alert('휴식 시간이 끝났습니다! 다시 한번 달려볼까요? 🚀');
+            alert('휴식 시간이 끝났습니다! 다시 시작하시겠습니까?');
         }
     }
     
@@ -150,35 +145,6 @@ themeSelector.addEventListener('change', (e) => {
     document.body.dataset.theme = e.target.value;
 });
 
-// 소리 제어 함수
-function stopAllSounds() {
-    Object.values(audios).forEach(audio => {
-        if(audio) {
-            audio.pause();
-            audio.currentTime = 0; // 처음으로 되감기
-        }
-    });
-}
-
-function playSelectedSound() {
-    stopAllSounds();
-    const selected = soundSelector.value;
-    
-    // 타이머가 작동 중이고 소리가 'none'이 아닐 때만 재생
-    if (selected !== 'none' && isRunning && audios[selected]) {
-        audios[selected].play().catch(e => {
-            console.log('Audio play failed (브라우저 정책일 수 있음):', e);
-        });
-    }
-}
-
-// 소리 선택 드롭다운 변경 이벤트
-soundSelector.addEventListener('change', () => {
-    if (isRunning) {
-        playSelectedSound();
-    }
-});
-
 // 이벤트 리스너 등록
 startBtn.addEventListener('click', toggleTimer);
 resetBtn.addEventListener('click', resetTimer);
@@ -195,38 +161,117 @@ repeatBtn.addEventListener('click', () => {
 
 modeBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
-        if(isRunning) {
-            if(!confirm('타이머가 진행 중입니다. 정말 모드를 변경하시겠습니까?')) return;
+        const clickedMode = e.target.dataset.mode;
+        
+        if (clickedMode === currentMode) {
+            // 현재 모드와 같은 버튼을 클릭하면 5분 추가
+            if (clickedMode === 'work') {
+                if (WORK_TIME + (5 * 60) > MAX_WORK_TIME) {
+                    alert('집중 시간은 최대 120분까지만 설정 가능합니다!');
+                    return;
+                }
+                WORK_TIME += 5 * 60;
+                timeLeft += 5 * 60;
+            } else {
+                if (BREAK_TIME + (5 * 60) > MAX_BREAK_TIME) {
+                    alert('휴식 시간은 최대 30분까지만 설정 가능합니다!');
+                    return;
+                }
+                BREAK_TIME += 5 * 60;
+                timeLeft += 5 * 60;
+            }
+            updateDisplay();
+        } else {
+            // 다른 모드로 변경
+            if(isRunning) {
+                if(!confirm('타이머가 진행 중입니다. 정말 모드를 변경하시겠습니까?')) return;
+            }
+            switchMode(clickedMode);
         }
-        switchMode(e.target.dataset.mode);
     });
 });
 
-// 시간 조절 버튼 이벤트
-adjustBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const addMins = parseInt(e.target.dataset.add);
-        
-        if(currentMode === 'work') {
-            if (WORK_TIME + (addMins * 60) > MAX_WORK_TIME) {
-                alert('대표님! 열정도 좋지만 집중 시간은 최대 120분까지만 설정 가능합니다! 😅');
-                return;
-            }
-            WORK_TIME += addMins * 60;
-            timeLeft += addMins * 60;
-            document.querySelector('.mode-btn[data-mode="work"]').textContent = `집중 ${Math.floor(WORK_TIME / 60)}분`;
-        } else {
-            if (BREAK_TIME + (addMins * 60) > MAX_BREAK_TIME) {
-                alert('대표님! 휴식은 달콤하지만 최대 30분까지만 가능합니다! 얼른 복귀하셔야죠! 🚀');
-                return;
-            }
-            BREAK_TIME += addMins * 60;
-            timeLeft += addMins * 60;
-            document.querySelector('.mode-btn[data-mode="break"]').textContent = `휴식 ${Math.floor(BREAK_TIME / 60)}분`;
-        }
-        
-        updateDisplay();
-    });
+// 마우스 휠로 시간 조절하는 기능
+minutesDisplay.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if (isRunning) return;
+    let change = e.deltaY < 0 ? 60 : -60; // 위로 스크롤 시 1분(60초) 증가
+    adjustTimeOnScroll(change);
+});
+
+secondsDisplay.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if (isRunning) return;
+    let change = e.deltaY < 0 ? 1 : -1; // 위로 스크롤 시 1초 증가
+    adjustTimeOnScroll(change);
+});
+
+function adjustTimeOnScroll(secondsToAdd) {
+    let newTimeLeft = timeLeft + secondsToAdd;
+    
+    // 최소 1초 유지
+    if (newTimeLeft < 1) {
+        newTimeLeft = 1;
+    }
+    
+    // 최대 시간 제한
+    if (currentMode === 'work' && newTimeLeft > MAX_WORK_TIME) {
+        newTimeLeft = MAX_WORK_TIME;
+    } else if (currentMode === 'break' && newTimeLeft > MAX_BREAK_TIME) {
+        newTimeLeft = MAX_BREAK_TIME;
+    }
+
+    // 변경된 시간을 베이스 설정 시간(WORK_TIME/BREAK_TIME)에도 반영
+    let diff = newTimeLeft - timeLeft;
+    if (currentMode === 'work') {
+        WORK_TIME += diff;
+    } else {
+        BREAK_TIME += diff;
+    }
+    
+    timeLeft = newTimeLeft;
+    updateDisplay();
+}
+
+// --- 설정 모달 로직 ---
+settingsBtn.addEventListener('click', () => {
+    // 현재 설정된 시간을 인풋에 채우기
+    workTimeInput.value = Math.floor(WORK_TIME / 60);
+    breakTimeInput.value = Math.floor(BREAK_TIME / 60);
+    settingsModal.classList.add('active');
+});
+
+closeSettingsBtn.addEventListener('click', () => {
+    settingsModal.classList.remove('active');
+});
+
+// 모달 배경 클릭 시 닫기
+settingsModal.addEventListener('click', (e) => {
+    if (e.target === settingsModal) {
+        settingsModal.classList.remove('active');
+    }
+});
+
+saveSettingsBtn.addEventListener('click', () => {
+    let newWorkTime = parseInt(workTimeInput.value);
+    let newBreakTime = parseInt(breakTimeInput.value);
+
+    // 입력값 유효성 검사
+    if (isNaN(newWorkTime) || newWorkTime < 1) newWorkTime = 1;
+    if (newWorkTime > 120) newWorkTime = 120; // MAX 120분
+    
+    if (isNaN(newBreakTime) || newBreakTime < 1) newBreakTime = 1;
+    if (newBreakTime > 30) newBreakTime = 30; // MAX 30분
+
+    // 설정된 시간으로 베이스 타이머 업데이트
+    WORK_TIME = newWorkTime * 60;
+    BREAK_TIME = newBreakTime * 60;
+
+    // 모달 닫기
+    settingsModal.classList.remove('active');
+    
+    // 즉시 적용을 위해 타이머 리셋
+    resetTimer();
 });
 
 // 초기화 실행
