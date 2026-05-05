@@ -328,6 +328,10 @@ footer {
 .portal-body {
     background-color: var(--bg-color);
     overflow-x: hidden;
+    display: block; /* 기존 body의 flex 덮어쓰기 */
+    height: auto;
+    align-items: initial;
+    justify-content: initial;
 }
 
 .portal-main {
@@ -485,5 +489,54 @@ footer {
 .news-card .date {
     font-size: 0.8rem;
     opacity: 0.5;
+}
+
+/* 모바일 반응형 디자인 (Responsive Design) */
+@media (max-width: 768px) {
+    /* 네비게이션 바 모바일 최적화 */
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 1rem;
+    }
+    .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    /* 영웅 섹션 모바일 최적화 */
+    .hero-section {
+        padding: 3rem 1rem;
+    }
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    .hero-section p {
+        font-size: 1rem;
+    }
+    
+    /* 툴 그리드 모바일 최적화 (1열 배치) */
+    .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .tool-card {
+        padding: 1.5rem;
+    }
+    
+    /* 타이머 카드 모바일 최적화 (timer.html) */
+    .timer-display {
+        font-size: 4.5rem;
+    }
+    .controls-top {
+        flex-direction: column;
+    }
+    .controls-bottom {
+        flex-wrap: wrap;
+    }
+    .controls-bottom button {
+        flex: 1 1 100%; /* 버튼이 한 줄씩 차지하도록 */
+    }
 }
 
