@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프리미엄 뽀모도로 타이머 | 빗소리, 백색소음으로 완벽한 몰입</title>
+    <meta name="description" content="설치가 필요 없는 무료 뽀모도로 타이머입니다. 다크모드, 감성 카페, 빗소리 등 맞춤형 백색소음으로 당신의 집중력을 200% 끌어올려보세요.">
+    <meta name="keywords" content="뽀모도로, 타이머, 집중력, 백색소음, 빗소리, 스터디 타이머, pomodoro timer">
+    <meta property="og:title" content="프리미엄 뽀모도로 타이머">
+    <meta property="og:description" content="빗소리, 백색소음으로 완벽한 몰입의 경험을 하세요. 무료 무설치 타이머.">
+    <meta property="og:type" content="website">
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body data-theme="dark">
+    <div class="container">
+        <header>
+            <h1>Focus Timer</h1>
+            <div class="controls-top">
+                <select id="theme-selector" title="디자인 테마 선택">
+                    <option value="dark">🌙 다크 앤 시크</option>
+                    <option value="light">☀️ 라이트 앤 클린</option>
+                    <option value="cafe">☕ 우드 앤 카페</option>
+                    <option value="forest">🌲 포레스트 힐링</option>
+                </select>
+                <select id="sound-selector" title="배경 소리 선택">
+                    <option value="none">🔇 소리 없음</option>
+                    <option value="rain">🌧️ 잔잔한 빗소리</option>
+                    <option value="cafe">☕ 백색소음 (카페)</option>
+                    <option value="fire">🔥 장작 타는 소리</option>
+                    <option value="jazz">🎷 부드러운 재즈</option>
+                </select>
+            </div>
+        </header>
+
+        <!-- 상단 애드센스 광고 영역 (나중에 여기에 구글 애드센스 스크립트를 넣습니다) -->
+        <div class="adsense-banner top-ad">
+            <span>[광고] 구글 애드센스 배너 (상단)</span>
+        </div>
+
+        <main class="timer-card">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="work">집중 10분</button>
+                <button class="mode-btn" data-mode="break">휴식 5분</button>
+            </div>
+            <div class="time-adjusters" style="display: flex; gap: 10px; margin-bottom: -15px;">
+                <button class="adjust-btn" data-add="5">+5분</button>
+                <button class="adjust-btn" data-add="10">+10분</button>
+            </div>
+            <div class="timer-display">
+                <span id="minutes">10</span><span class="colon">:</span><span id="seconds">00</span>
+            </div>
+            <div class="controls-bottom">
+                <button id="reset-btn" class="primary-btn">초기화</button>
+                <button id="repeat-btn" class="primary-btn">자동반복: OFF</button>
+                <button id="start-btn" class="primary-btn">시작</button>
+            </div>
+        </main>
+        
+        <!-- 하단 애드센스 광고 영역 (나중에 여기에 구글 애드센스 스크립트를 넣습니다) -->
+        <div class="adsense-banner bottom-ad">
+            <span>[광고] 구글 애드센스 배너 (하단)</span>
+        </div>
+
+        <footer>
+            <p>Made with ❤️ by Hyung | <a href="privacy.html" class="privacy-link">개인정보처리방침</a></p>
+        </footer>
+    </div>
+    
+    <!-- Audio Elements for Background Sounds -->
+    <!-- 참고: 데모용으로 Pixabay 무료 오디오 URL을 사용합니다. -->
+    <!-- 효과음 오디오 엘리먼트 (차분한 사운드) -->
+    <audio id="start-sound" src="https://actions.google.com/sounds/v1/water/water_drop.ogg" preload="auto"></audio>
+    <audio id="end-sound" src="https://upload.wikimedia.org/wikipedia/commons/2/23/Tibetan_bowl.ogg" preload="auto"></audio>
+    <audio id="audio-rain" loop src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c1539c.mp3?filename=heavy-rain-nature-sounds-8186.mp3"></audio>
+    <audio id="audio-cafe" loop src="https://cdn.pixabay.com/download/audio/2022/11/04/audio_3d12d4d8ce.mp3?filename=cafe-ambience-2-125010.mp3"></audio>
+    <audio id="audio-fire" loop src="https://cdn.pixabay.com/download/audio/2022/03/09/audio_82e6dff987.mp3?filename=fireplace-sound-14811.mp3"></audio>
+    <audio id="audio-jazz" loop src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=lounge-music-113593.mp3"></audio>
+
+    <script src="app.js"></script>
+</body>
+</html>
