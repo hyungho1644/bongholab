@@ -1,0 +1,32 @@
+User-agent: *
+Allow: /
+
+# Disallow crawlers from accessing private directories
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Disallow common bot attacks
+Disallow: /wp-admin/
+Disallow: /wp-login/
+Disallow: /*.php
+
+# Allow major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Slow down aggressive crawlers
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://www.bongholab.com/sitemap.xml

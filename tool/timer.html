@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="백색소음과 함께하는 뽀모도로 타이머. 무료이며 로컬에서 작동합니다.">
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE">
+    
+    <title>뽀모도로 타이머 — BonghoLab</title>
+    <link rel="canonical" href="https://www.bongholab.com/tools/timer.html">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .timer-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .timer-display {
+            background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .timer-display.rest {
+            background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .timer-display.long-rest {
+            background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .timer-mode {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        .timer-time {
+            font-size: 5rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.1em;
+            margin: 1rem 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .timer-session {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-bottom: 1rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .btn-control {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 100px;
+        }
+
+        .btn-start {
+            background: white;
+            color: #3B82F6;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-start:active {
+            transform: translateY(0);
+        }
+
+        .btn-pause {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-pause:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-reset {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-reset:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .settings {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .settings h3 {
+            margin-bottom: 1.5rem;
+            color: #0F172A;
+        }
+
+        .setting-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .setting-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1E293B;
+            font-size: 0.95rem;
+        }
+
+        .setting-group input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #E2E8F0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .setting-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3B82F6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .setting-group input[type="range"]::-webkit-slider-thumb:hover {
+            background: #60A5FA;
+            transform: scale(1.2);
+        }
+
+        .setting-group input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3B82F6;
+            cursor: pointer;
+            border: none;
+        }
+
+        .value-display {
+            display: inline-block;
+            background: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            font-weight: 600;
+            color: #3B82F6;
+        }
+
+        .sound-options {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .sound-options label {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 0;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .sound-options label:hover {
+            background: #F1F5F9;
+        }
+
+        .sound-options input[type="radio"] {
+            margin-right: 1rem;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            margin-top: 1.5rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            border-radius: 4px;
+            transition: width 0.1s linear;
+        }
+
+        .stats {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #64748B;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3B82F6;
+        }
+
+        .notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10B981;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timer-display {
+                padding: 2rem 1rem;
+            }
+
+            .timer-time {
+                font-size: 3.5rem;
+            }
+
+            .controls {
+                gap: 0.5rem;
+            }
+
+            .btn-control {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+                min-width: 80px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="logo">
+                    <span class="logo-mark">BL</span>
+                    <span class="logo-text">BonghoLab</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="/">블로그</a></li>
+                    <li><a href="/tools/timer.html">도구</a></li>
+                    <li><a href="/about.html">소개</a></li>
+                    <li><a href="/contact.html">연락</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container timer-container">
+        <h1 style="text-align: center; margin: 2rem 0; font-size: 2rem;">⏱️ 뽀모도로 타이머</h1>
+        <p style="text-align: center; color: #64748B; margin-bottom: 2rem;">집중력을 높이기 위한 과학적 시간 관리</p>
+
+        <!-- Timer Display -->
+        <div class="timer-display" id="timerDisplay">
+            <div class="timer-mode" id="timerMode">집중하기</div>
+            <div class="timer-time" id="timerTime">25:00</div>
+            <div class="timer-session" id="sessionInfo">세션 1/4</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn-control btn-start" id="startBtn">시작</button>
+            <button class="btn-control btn-pause" id="pauseBtn" style="display: none;">일시정지</button>
+            <button class="btn-control btn-reset" id="resetBtn">초기화</button>
+        </div>
+
+        <!-- Settings -->
+        <div class="settings">
+            <h3>⚙️ 설정</h3>
+            
+            <div class="setting-group">
+                <label>
+                    집중 시간: <span class="value-display" id="focusValue">25</span>분
+                </label>
+                <input type="range" id="focusRange" min="1" max="60" value="25">
+            </div>
+
+            <div class="setting-group">
+                <label>
+                    휴식 시간: <span class="value-display" id="restValue">5</span>분
+                </label>
+                <input type="range" id="restRange" min="1" max="30" value="5">
+            </div>
+
+            <div class="setting-group">
+                <label>
+                    긴 휴식: <span class="value-display" id="longRestValue">15</span>분
+                </label>
+                <input type="range" id="longRestRange" min="5" max="60" value="15">
+            </div>
+
+            <div class="setting-group">
+                <label>백색소음</label>
+                <div class="sound-options">
+                    <label>
+                        <input type="radio" name="sound" value="none" checked>
+                        <span>없음</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="sound" value="rain">
+                        <span>☔ 빗소리</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="sound" value="coffee">
+                        <span>☕ 카페 소음</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="sound" value="ocean">
+                        <span>🌊 파도 소리</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="sound" value="forest">
+                        <span>🌲 숲 소리</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label>
+                    🔊 볼륨: <span class="value-display" id="volumeValue">50</span>%
+                </label>
+                <input type="range" id="volumeRange" min="0" max="100" value="50">
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-label">완료한 세션</div>
+                <div class="stat-value" id="completedSessions">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">집중 시간</div>
+                <div class="stat-value" id="focusedMinutes">0분</div>
+            </div>
+        </div>
+
+        <div style="background: #F0F4FF; border-left: 4px solid #3B82F6; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+            <h3 style="color: #3B82F6; margin-bottom: 0.5rem;">💡 팁</h3>
+            <p style="margin: 0; color: #64748B;">타이머가 시작되면 다른 탭을 열어도 됩니다. 시간이 되면 알림이 나타나고 소리가 납니다.</p>
+        </div>
+    </main>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>BonghoLab</h4>
+                    <p>생산성과 IT에 관한 실용적인 인사이트를 제공합니다.</p>
+                    <div class="social-links">
+                        <a href="https://twitter.com/bongholab" aria-label="Twitter">𝕏</a>
+                        <a href="https://github.com/bongholab" aria-label="GitHub">GitHub</a>
+                        <a href="https://linkedin.com/in/bongholab" aria-label="LinkedIn">LinkedIn</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>네비게이션</h4>
+                    <ul>
+                        <li><a href="/">블로그</a></li>
+                        <li><a href="/tools/timer.html">도구</a></li>
+                        <li><a href="/about.html">소개</a></li>
+                        <li><a href="/contact.html">연락</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>정책</h4>
+                    <ul>
+                        <li><a href="/privacy.html">개인정보처리방침</a></li>
+                        <li><a href="/terms.html">이용약관</a></li>
+                        <li><a href="/contact.html">연락처</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BonghoLab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Timer State
+        let timerState = {
+            isRunning: false,
+            isPaused: false,
+            timeLeft: 25 * 60,
+            totalTime: 25 * 60,
+            session: 1,
+            isRestTime: false,
+            completedSessions: 0,
+            totalFocusedMinutes: 0,
+            focusTime: 25,
+            restTime: 5,
+            longRestTime: 15,
+            currentSound: 'none'
+        };
+
+        const elements = {
+            timerTime: document.getElementById('timerTime'),
+            timerDisplay: document.getElementById('timerDisplay'),
+            timerMode: document.getElementById('timerMode'),
+            sessionInfo: document.getElementById('sessionInfo'),
+            startBtn: document.getElementById('startBtn'),
+            pauseBtn: document.getElementById('pauseBtn'),
+            resetBtn: document.getElementById('resetBtn'),
+            focusRange: document.getElementById('focusRange'),
+            restRange: document.getElementById('restRange'),
+            longRestRange: document.getElementById('longRestRange'),
+            focusValue: document.getElementById('focusValue'),
+            restValue: document.getElementById('restValue'),
+            longRestValue: document.getElementById('longRestValue'),
+            volumeRange: document.getElementById('volumeRange'),
+            volumeValue: document.getElementById('volumeValue'),
+            completedSessions: document.getElementById('completedSessions'),
+            focusedMinutes: document.getElementById('focusedMinutes'),
+            notification: document.getElementById('notification'),
+            progressFill: document.getElementById('progressFill')
+        };
+
+        let timerInterval = null;
+        let audioContext = null;
+
+        // Update display
+        function updateDisplay() {
+            const minutes = Math.floor(timerState.timeLeft / 60);
+            const seconds = timerState.timeLeft % 60;
+            elements.timerTime.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+            // Update progress
+            const progress = ((timerState.totalTime - timerState.timeLeft) / timerState.totalTime) * 100;
+            elements.progressFill.style.width = progress + '%';
+
+            // Update stats
+            elements.completedSessions.textContent = timerState.completedSessions;
+            elements.focusedMinutes.textContent = timerState.totalFocusedMinutes + '분';
+        }
+
+        // Show notification
+        function showNotification(message) {
+            elements.notification.textContent = message;
+            elements.notification.style.display = 'block';
+            setTimeout(() => {
+                elements.notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Play sound
+        function playSound() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            const now = audioContext.currentTime;
+            
+            // 3개의 비프음
+            for (let i = 0; i < 3; i++) {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                
+                osc.frequency.value = 800 + (i * 200);
+                osc.type = 'sine';
+                
+                gain.gain.setValueAtTime(0.3, now + i * 0.2);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.2 + 0.1);
+                
+                osc.start(now + i * 0.2);
+                osc.stop(now + i * 0.2 + 0.1);
+            }
+        }
+
+        // Timer tick
+        function tick() {
+            if (timerState.timeLeft > 0) {
+                timerState.timeLeft--;
+                if (!timerState.isRestTime) {
+                    timerState.totalFocusedMinutes = Math.floor((timerState.focusTime * 60 - timerState.timeLeft) / 60);
+                }
+                updateDisplay();
+            } else {
+                completeSession();
+            }
+        }
+
+        // Complete session
+        function completeSession() {
+            clearInterval(timerInterval);
+            timerState.isRunning = false;
+            playSound();
+
+            if (timerState.isRestTime) {
+                // Rest completed
+                if (timerState.session === 4) {
+                    // Long rest
+                    startSession(true, true);
+                    showNotification('긴 휴식을 시작합니다. 15분 후에 만나요!');
+                } else {
+                    // Next focus
+                    timerState.session++;
+                    startSession(false, false);
+                    showNotification('집중 시간이 시작됩니다!');
+                }
+            } else {
+                // Focus completed
+                timerState.completedSessions++;
+                
+                if (timerState.session === 4) {
+                    // Long rest after 4th session
+                    startSession(true, true);
+                    showNotification('축하합니다! 긴 휴식을 시작합니다.');
+                } else {
+                    // Short rest
+                    startSession(true, false);
+                    showNotification('휴식 시간입니다! 잠깐 쉬어가세요.');
+                }
+            }
+
+            elements.startBtn.style.display = 'block';
+            elements.pauseBtn.style.display = 'none';
+            updateDisplay();
+
+            // Request notification permission and show browser notification
+            if (Notification.permission === 'granted') {
+                new Notification('BonghoLab 타이머', {
+                    body: timerState.isRestTime ? '휴식 시간입니다!' : '집중 시간입니다!'
+                });
+            }
+        }
+
+        // Start/Pause
+        elements.startBtn.addEventListener('click', () => {
+            if (!timerState.isRunning) {
+                timerState.isRunning = true;
+                elements.startBtn.style.display = 'none';
+                elements.pauseBtn.style.display = 'block';
+                timerInterval = setInterval(tick, 1000);
+            }
+        });
+
+        elements.pauseBtn.addEventListener('click', () => {
+            timerState.isRunning = false;
+            clearInterval(timerInterval);
+            elements.startBtn.style.display = 'block';
+            elements.pauseBtn.style.display = 'none';
+        });
+
+        // Reset
+        elements.resetBtn.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            timerState.isRunning = false;
+            timerState.timeLeft = timerState.focusTime * 60;
+            timerState.totalTime = timerState.focusTime * 60;
+            timerState.session = 1;
+            timerState.isRestTime = false;
+            elements.timerDisplay.className = 'timer-display';
+            elements.timerMode.textContent = '집중하기';
+            elements.sessionInfo.textContent = '세션 1/4';
+            elements.startBtn.style.display = 'block';
+            elements.pauseBtn.style.display = 'none';
+            updateDisplay();
+            showNotification('타이머가 초기화되었습니다.');
+        });
+
+        // Settings
+        elements.focusRange.addEventListener('input', (e) => {
+            timerState.focusTime = parseInt(e.target.value);
+            elements.focusValue.textContent = timerState.focusTime;
+            if (!timerState.isRunning && !timerState.isRestTime) {
+                timerState.timeLeft = timerState.focusTime * 60;
+                timerState.totalTime = timerState.focusTime * 60;
+                updateDisplay();
+            }
+        });
+
+        elements.restRange.addEventListener('input', (e) => {
+            timerState.restTime = parseInt(e.target.value);
+            elements.restValue.textContent = timerState.restTime;
+        });
+
+        elements.longRestRange.addEventListener('input', (e) => {
+            timerState.longRestTime = parseInt(e.target.value);
+            elements.longRestValue.textContent = timerState.longRestTime;
+        });
+
+        elements.volumeRange.addEventListener('input', (e) => {
+            elements.volumeValue.textContent = e.target.value;
+        });
+
+        // Request notification permission
+        if ('Notification' in window && Notification.permission === 'default') {
+            Notification.requestPermission();
+        }
+
+        // Start session helper
+        function startSession(isRest, isLongRest) {
+            timerState.isRestTime = isRest;
+            
+            if (isLongRest) {
+                timerState.timeLeft = timerState.longRestTime * 60;
+                timerState.totalTime = timerState.longRestTime * 60;
+                timerState.session = 1;
+                elements.timerDisplay.className = 'timer-display long-rest';
+                elements.timerMode.textContent = '긴 휴식';
+            } else if (isRest) {
+                timerState.timeLeft = timerState.restTime * 60;
+                timerState.totalTime = timerState.restTime * 60;
+                elements.timerDisplay.className = 'timer-display rest';
+                elements.timerMode.textContent = '휴식하기';
+            } else {
+                timerState.timeLeft = timerState.focusTime * 60;
+                timerState.totalTime = timerState.focusTime * 60;
+                elements.timerDisplay.className = 'timer-display';
+                elements.timerMode.textContent = '집중하기';
+            }
+            
+            elements.sessionInfo.textContent = `세션 ${timerState.session}/4`;
+            updateDisplay();
+        }
+
+        // Initial display
+        updateDisplay();
+    </script>
+</body>
+</html>

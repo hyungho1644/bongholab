@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ChatGPT를 잘 쓰기 위한 프롬프트 10개를 공개합니다. 실무에서 바로 복붙 가능합니다.">
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE">
+    
+    <title>업무 효율 2배 올리는 ChatGPT 프롬프트 10개 — BonghoLab</title>
+    <link rel="canonical" href="https://www.bongholab.com/blog/chatgpt-prompts.html">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        .article-meta {
+            display: flex;
+            gap: 1.5rem;
+            border-bottom: 1px solid #E2E8F0;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            color: #64748B;
+        }
+        .article-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3B82F6;
+            padding-bottom: 0.5rem;
+        }
+        .article-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .prompt-box {
+            background: #1E293B;
+            color: #E2E8F0;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #3B82F6;
+            font-family: monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        .prompt-label {
+            background: #3B82F6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-family: inherit;
+            font-weight: 600;
+        }
+        .copy-hint {
+            color: #64748B;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        .use-case {
+            background: #F0F4FF;
+            border-left: 4px solid #3B82F6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .use-case strong {
+            color: #3B82F6;
+        }
+        .highlight-box {
+            background: #F0F4FF;
+            border-left: 4px solid #3B82F6;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="logo">
+                    <span class="logo-mark">BL</span>
+                    <span class="logo-text">BonghoLab</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="/">블로그</a></li>
+                    <li><a href="/tools/timer.html">도구</a></li>
+                    <li><a href="/about.html">소개</a></li>
+                    <li><a href="/contact.html">연락</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <main class="container" style="padding: 3rem 1.5rem;">
+        <article class="article-content">
+            <h1>업무 효율 2배 올리는 ChatGPT 프롬프트 10개</h1>
+            
+            <div class="article-meta">
+                <time>2026년 5월 1일</time>
+                <span>5분 읽기</span>
+                <span>작성자: 봉호</span>
+            </div>
+
+            <h2>좋은 질문 vs 나쁜 질문</h2>
+            <p>ChatGPT의 답변 품질은 질문의 품질에 정확히 비례합니다.</p>
+
+            <p><strong>나쁜 질문:</strong> "이메일 작성해줘"</p>
+            <p><strong>좋은 질문:</strong> "마케팅 담당자에게 보낼 협력 제안 이메일을 작성해줘. 톤은 전문적이고 친화적이어야 하며, 구체적인 협력 방안 3가지를 포함해야 해. 우리는 AI 솔루션 회사야."</p>
+
+            <p>이 글의 10개 프롬프트는 모두 검증된 것들입니다. 복사해서 바로 쓰세요!</p>
+
+            <h2>프롬프트 1️⃣: 이메일 작성</h2>
+
+            <div class="use-case">
+                <strong>📧 언제 쓸까?</strong> 중요한 이메일을 써야 할 때, 톤이 애매할 때
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">복사해서 쓰세요</div>
+다음 요구사항에 맞는 이메일을 작성해줘:
+- 수신자: [상대방 이름 및 직책]
+- 목적: [이메일의 목적]
+- 톤: [전문적/친화적/공식적 등]
+- 포함할 내용: [반드시 포함되어야 할 내용 3-4가지]
+- 길이: [짧게/중간/길게]
+
+예시: 수신자는 마케팅 담당자 김팀장이고, 목적은 협력 제안이야.
+            </div>
+            <p class="copy-hint">💡 팁: 상대방의 직책, 회사, 성격을 최대한 구체적으로 써야 더 좋은 답변을 얻습니다.</p>
+
+            <h2>프롬프트 2️⃣: 보고서 요약</h2>
+
+            <div class="use-case">
+                <strong>📊 언제 쓸까?</strong> 긴 보고서를 읽어야 할 때, 시간이 부족할 때
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">복사해서 쓰세요</div>
+다음 텍스트를 요약해줘. 아래 항목들을 포함해서:
+- 핵심 내용 (3줄)
+- 주요 숫자/통계
+- 결론 및 권장사항
+- 추가 조사가 필요한 부분
+
+[여기에 보고서 내용을 붙여넣기]
+            </div>
+            <p class="copy-hint">💡 팁: 긴 문서도 한 번에 처리 가능합니다. 구조적으로 요약해달라고 하면 더 좋습니다.</p>
+
+            <h2>프롬프트 3️⃣: 코드 리뷰</h2>
+
+            <div class="use-case">
+                <strong>💻 언제 쓸까?</strong> 코드에 버그가 있을 때, 최적화가 필요할 때
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">복사해서 쓰세요</div>
+다음 [Python/JavaScript/Java 등] 코드를 검토해줘:
+1. 버그나 오류 찾기
+2. 성능 최적화 제안
+3. 더 나은 코딩 스타일 제안
+4. 보안 문제가 있는지 확인
+
+[코드를 여기에 붙여넣기]
+
+특히 [특정 부분]에 대한 피드백을 자세히 줄 수 있어?
+            </div>
+            <p class="copy-hint">💡 팁: 코드의 목적을 먼저 설명하면 더 정확한 리뷰를 받습니다.</p>
+
+            <h2>프롬프트 4️⃣: 학습 계획</h2>
+
+            <div class="use-case">
+                <strong>🎓 언제 쓸까?</strong> 새로운 기술을 배워야 할 때, 체계적으로 공부하고 싶을 때
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">복사해서 쓰세요</div>
+[주제] 를 배우고 싶어. 나의 배경은 [현재 수준] 이고, 목표는 [구체적인 목표] 야.
+
+4주 학습 계획을 만들어줄 수 있어?
+- 1주차 목표
+- 2주차 목표
+- 3주차 목표
+- 4주차 목표
+
+각 주마다:
+- 배워야 할 핵심 개념
+- 연습 프로젝트
+- 예상 학습 시간
+
+예: React를 배우고 싶어. 기초 JavaScript는 알고, 목표는 실무 프로젝트에 쓸 수 있는 수준.
+            </div>
+            <p class="copy-hint">💡 팁: 목표가 구체할수록 더 맞춤형 계획을 받습니다.</p>
+
+            <h2>프롬프트 5️⃣: 토론/논쟁 준비</h2>
+
+            <div class="use-case">
+                <strong>💬 언제 쓸까?</strong> 중요한 회의가 있을 때, 상반된 의견에 대비할 때
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">복사해서 쓰세요</div>
+[주제]에 대해 회의가 있어. 나는 [당신의 입장] 을 주장하고 싶어.
+
+상대방이 반박할 수 있는 논점 5가지를 만들어줄 수 있어?
+각 논점에 대해 어떻게 대응할지도 알려줘.
+
+그리고 내 입장을 강력하게 전달할 수 있는 논거 3가지도 준비해줄 수 있어?
+
+예: 우리 회사가 AI 도입을 해야 한다고 주장하고 싶어. 상대방은 비용 문제와 직원 반발을 걱정할 거야.
+            </div>
+            <p class="copy-hint">💡 팁: 상대방이 누구인지, 회사 상황이 어떤지 알려주면 더 현실적인 답변을 얻습니다.</p>
+
+            <h2>프롬프트 6️⃣: 아이디어 브레인스토밍</h2>
+
+            <div class="use-case">
+                <strong>💡 언제 쓸까?</strong> 새로운 아이디어가 필요할 때, 창의적인 솔루션이 필요할 때
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">복사해서 쓰세요</div>
+[문제 설명] 를 해결하기 위한 아이디어 10가지를 내줄 수 있어?
+
+조건:
+- 예산: [예산]
+- 대상: [대상]
+- 기간: [기간]
+- 제약사항: [있다면]
+
+각 아이디어마다:
+- 개요 (1줄)
+- 장점 3가지
+- 단점 2가지
+- 실행 난이도 (쉬움/중간/어려움)
+
+예: 우리 블로그 월 방문자가 50명밖에 안 돼. 이를 1000명으로 늘리는 방법이 뭘까?
+            </div>
+            <p class="copy-hint">💡 팁: 제약조건을 명확히 하면 실행 가능한 아이디어를 더 많이 얻습니다.</p>
+
+            <h2>프롬프트 7️⃣: 글쓰기 개선</h2>
+
+            <div class="use-case">
+                <strong>✍️ 언제 쓸까?</strong> 글의 톤이 이상할 때, 더 잘 쓰고 싶을 때
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">복사해서 쓰세요</div>
+다음 글을 개선해줄 수 있어?
+
+개선 포인트:
+- 톤: [캐주얼/전문적/설득력 있게 등]
+- 길이: [더 짧게/더 길게/그대로]
+- 명확성: [더 쉽게/더 심화적으로]
+- 임팩트: [더 강하게/더 부드럽게]
+
+[여기에 글을 붙여넣기]
+
+그리고 처음 문장을 특히 강력하게 다시 써줄 수 있어?
+            </div>
+            <p class="copy-hint">💡 팁: 현재 글의 목적(블로그/이메일/보고서 등)을 알려주면 더 적절한 수정을 받습니다.</p>
+
+            <h2>프롬프트 8️⃣: 의사결정 도움</h2>
+
+            <div class="use-case">
+                <strong>🎯 언제 쓸까?</strong> 선택지가 많을 때, 결정을 내리기 어려울 때
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">복사해서 쓰세요</div>
+[선택지 A] 와 [선택지 B] 중에 뭘 선택해야 할까?
+
+상황:
+- 배경: [상황 설명]
+- 목표: [당신의 목표]
+- 제약: [시간, 비용, 기타]
+
+A의 장단점, B의 장단점을 비교해줄 수 있어?
+그리고 각각 선택했을 때의 3년 후를 그려줄 수 있어?
+
+마지막으로 당신이라면 뭘 선택할지도 알려줄 수 있어?
+
+예: 현재 회사에 남을지, 스타트업으로 갈지 고민 중이야.
+            </div>
+            <p class="copy-hint">💡 팁: 당신이 가장 가치있게 생각하는 것(돈/시간/성장/안정)을 알려주면 더 정확합니다.</p>
+
+            <h2>프롬프트 9️⃣: 데이터 분석</h2>
+
+            <div class="use-case">
+                <strong>📈 언제 쓸까?</strong> 숫자를 이해해야 할 때, 패턴을 찾아야 할 때
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">복사해서 쓰세요</div>
+다음 데이터를 분석해줄 수 있어?
+
+[데이터를 표 형태로 붙여넣기]
+
+분석해야 할 항목:
+1. 주요 추세는 뭔가?
+2. 이상한 점이나 패턴이 있나?
+3. 월별/분기별 변화는?
+4. 이 데이터가 의미하는 게 뭔가?
+5. 다음에 어떤 조치를 취해야 할까?
+
+데이터 시각화 방법도 추천해줄 수 있어? (그래프 종류)
+            </div>
+            <p class="copy-hint">💡 팁: 데이터의 출처와 수집 기간도 알려주면 더 정확한 분석을 받습니다.</p>
+
+            <h2>프롬프트 🔟: 오류 해결</h2>
+
+            <div class="use-case">
+                <strong>🐛 언제 쓸까?</strong> 에러 메시지가 나왔을 때, 뭔가 작동 안 할 때
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-label">복사해서 쓰세요</div>
+다음 에러가 나왔어. 뭐가 문제일까?
+
+에러 메시지:
+[에러 메시지 전체를 복사]
+
+환경:
+- 언어/도구: [Python/Node.js/SQL 등]
+- 버전: [버전 번호]
+- 어떤 작업을 하고 있었나: [구체적으로]
+
+코드:
+[에러가 나는 코드]
+
+해결 방법을 단계별로 알려줄 수 있어?
+그리고 이런 에러를 피하려면 어떻게 해야 할까?
+            </div>
+            <p class="copy-hint">💡 팁: 에러 메시지 전체와 코드를 함께 붙여넣으면 더 빨리 해결됩니다.</p>
+
+            <h2>프롬프트 사용 팁</h2>
+
+            <div class="highlight-box">
+                <strong>✅ 프롬프트를 더 잘 쓰기 위한 팁:</strong>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li><strong>구체적으로:</strong> "이메일 써줘"가 아니라 "고객에게 쓸 감사 이메일, 전문적 톤으로"</li>
+                    <li><strong>맥락을 제공:</strong> 상대방이 누군지, 회사 상황이 어떤지 알려주기</li>
+                    <li><strong>형식 지정:</strong> "3줄로", "표 형식으로", "번호 목록으로" 등</li>
+                    <li><strong>여러 번 물어보기:</strong> 첫 답변이 마음에 안 들면 "다시 해줄래?" 하면 됨</li>
+                    <li><strong>피드백 주기:</strong> "너무 길어", "더 어렵게" 등 다시 요청 가능</li>
+                </ul>
+            </div>
+
+            <h2>마치며</h2>
+            <p>ChatGPT는 단순히 답변해주는 도구가 아닙니다. 좋은 질문을 하면 당신의 '생각하는 파트너'가 됩니다.</p>
+
+            <p>이 10개의 프롬프트를 템플릿처럼 사용하고, 점차 당신의 상황에 맞게 수정하세요. 1개월 후 당신의 업무 효율은 2배 이상 높아져 있을 것입니다.</p>
+
+            <p>지금 바로 하나씩 시도해보세요!</p>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="/contact.html" class="btn btn-primary">더 많은 프롬프트 제안하기</a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>BonghoLab</h4>
+                    <p>생산성과 IT에 관한 실용적인 인사이트를 제공합니다.</p>
+                    <div class="social-links">
+                        <a href="https://twitter.com/bongholab" aria-label="Twitter">𝕏</a>
+                        <a href="https://github.com/bongholab" aria-label="GitHub">GitHub</a>
+                        <a href="https://linkedin.com/in/bongholab" aria-label="LinkedIn">LinkedIn</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>네비게이션</h4>
+                    <ul>
+                        <li><a href="/">블로그</a></li>
+                        <li><a href="/tools/timer.html">도구</a></li>
+                        <li><a href="/about.html">소개</a></li>
+                        <li><a href="/contact.html">연락</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>정책</h4>
+                    <ul>
+                        <li><a href="/privacy.html">개인정보처리방침</a></li>
+                        <li><a href="/terms.html">이용약관</a></li>
+                        <li><a href="/contact.html">연락처</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BonghoLab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "업무 효율 2배 올리는 ChatGPT 프롬프트 10개",
+        "datePublished": "2026-05-01",
+        "author": {
+            "@type": "Person",
+            "name": "봉호"
+        }
+    }
+    </script>
+</body>
+</html>

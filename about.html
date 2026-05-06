@@ -3,64 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>소개 | BonghoLab</title>
-    <meta name="description" content="BonghoLab은 생산성 향상을 위한 무료 툴과 IT 인사이트를 제공합니다. 운영자 봉호가 직접 써보고 도움이 된 것만 공유합니다.">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="BonghoLab의 창립자이자 운영자인 봉호에 대해 알아보세요.">
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE">
+    
+    <title>About — BonghoLab</title>
+    <link rel="canonical" href="https://www.bongholab.com/about.html">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        .about-section {
+            margin-bottom: 3rem;
+        }
+        .about-section h2 {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #3B82F6;
+        }
+        .author-card {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        .author-title {
+            color: #3B82F6;
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .mission-card {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .mission-card h3 {
+            margin-bottom: 0.5rem;
+        }
+        .philosophy-content {
+            background: #F8FAFC;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+        }
+        .philosophy-list {
+            list-style: none;
+            padding: 0;
+        }
+        .philosophy-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .philosophy-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3B82F6;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="logo">
+                    <span class="logo-mark">BL</span>
+                    <span class="logo-text">BonghoLab</span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="/">블로그</a></li>
+                    <li><a href="/tools/timer.html">도구</a></li>
+                    <li><a href="/about.html">소개</a></li>
+                    <li><a href="/contact.html">연락</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<nav class="navbar">
-    <div class="nav-inner">
-        <a href="index.html" class="nav-logo">Bongho<span>Lab</span></a>
-        <ul class="nav-menu">
-            <li><a href="index.html">블로그</a></li>
-            <li><a href="tools/timer.html">타이머</a></li>
-            <li><a href="about.html" class="active">소개</a></li>
-        </ul>
-    </div>
-</nav>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">BonghoLab에 대해</h1>
+                <p class="hero-subtitle">기술과 생산성에 열정을 가진 개발자의 블로그입니다</p>
+            </div>
+        </div>
+    </section>
 
-<div class="about-layout">
+    <!-- Main Content -->
+    <main class="container" style="padding: 3rem 1.5rem;">
+        <article class="about-content">
+            <!-- Author Section -->
+            <section class="about-section">
+                <h2>저자 소개</h2>
+                
+                <div class="author-card">
+                    <h3>봉호 (Bongho)</h3>
+                    <p class="author-title">풀스택 개발자 | 생산성 전문가</p>
+                    
+                    <p>안녕하세요. BonghoLab의 창립자이자 운영자인 봉호입니다.</p>
+                    
+                    <p>저는 10년 이상의 소프트웨어 개발 경력을 가지고 있으며, 그 과정에서 생산성과 효율성의 중요성을 깨달았습니다. 단순히 더 열심히 일하는 것이 아니라, 더 똑똑하게 일하는 방법에 관심을 가지게 되었습니다.</p>
+                    
+                    <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; color: #3B82F6;">전문 분야</h4>
+                    <ul class="philosophy-list" style="margin-bottom: 1rem;">
+                        <li>웹 애플리케이션 개발 (React, Node.js, Python)</li>
+                        <li>개발자 생산성 도구 및 워크플로우</li>
+                        <li>AI와 머신러닝의 실무 활용</li>
+                        <li>팀 협업 및 효율성 최적화</li>
+                        <li>집중력과 시간 관리 기법</li>
+                    </ul>
+                </div>
+            </section>
 
-    <h1>안녕하세요 👋</h1>
-    <p class="subtitle">BonghoLab을 방문해 주셔서 감사합니다.</p>
+            <!-- Mission Section -->
+            <section class="about-section">
+                <h2>BonghoLab의 미션</h2>
+                
+                <div class="mission-grid">
+                    <div class="mission-card">
+                        <h3>🎯 실용적인 조언</h3>
+                        <p>이론만 많은 콘텐츠는 도움이 되지 않습니다. 실제로 업무와 일상에서 적용할 수 있는 방법만 소개합니다.</p>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <h3>📚 검증된 정보</h3>
+                        <p>모든 조언은 과학적 근거와 개인 경험을 바탕으로 합니다. 근거 없는 주장은 피합니다.</p>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <h3>🚀 도구 제공</h3>
+                        <p>글로 설명하는 것도 중요하지만, 직접 사용할 수 있는 무료 도구를 만들어 제공합니다.</p>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <h3>🤝 커뮤니티</h3>
+                        <p>독자와의 대화를 소중히 여기며, 피드백을 적극 반영합니다.</p>
+                    </div>
+                </div>
+            </section>
 
-    <div class="about-section">
-        <h2>BonghoLab은 어떤 곳인가요?</h2>
-        <p>BonghoLab은 <strong>바쁜 현대인의 생산성 향상</strong>을 돕기 위해 만든 IT 블로그 겸 유틸리티 포털입니다. 뽀모도로 타이머처럼 <strong>설치 없이 브라우저에서 바로 쓸 수 있는 무료 툴</strong>과, AI·개발·업무 효율화에 관한 <strong>실용적인 블로그 글</strong>을 함께 제공합니다.</p>
-    </div>
+            <!-- Content Philosophy -->
+            <section class="about-section">
+                <h2>콘텐츠 철학</h2>
+                
+                <div class="philosophy-content">
+                    <p><strong>BonghoLab은 다음 원칙을 따릅니다:</strong></p>
+                    
+                    <ul class="philosophy-list">
+                        <li><strong>품질 우선:</strong> 글의 수보다 질을 중시합니다</li>
+                        <li><strong>개인 경험:</strong> 직접 경험하지 않은 것은 다루지 않습니다</li>
+                        <li><strong>투명성:</strong> 정보의 출처와 한계를 명확히 합니다</li>
+                        <li><strong>실용성:</strong> "왜?"뿐만 아니라 "어떻게?"를 함께 제시합니다</li>
+                        <li><strong>객관성:</strong> 특정 제품이나 서비스를 무비판적으로 추천하지 않습니다</li>
+                    </ul>
+                </div>
+            </section>
 
-    <div class="about-section">
-        <h2>어떤 주제를 다루나요?</h2>
-        <ul>
-            <li>⏱️ 집중력 향상 & 시간 관리 (뽀모도로, GTD 등)</li>
-            <li>🤖 AI 도구 활용법 & 최신 트렌드 (ChatGPT, Claude 등)</li>
-            <li>💻 개발자를 위한 생산성 팁 & 툴 추천</li>
-            <li>📱 실생활에 바로 쓰는 앱 & 서비스 리뷰</li>
-            <li>🛠️ 무료 유틸리티 툴 (타이머, 글자 수 세기 등)</li>
-        </ul>
-    </div>
+            <!-- Contact Section -->
+            <section class="about-section">
+                <h2>연락처</h2>
+                
+                <p>제안, 피드백, 협업 제의가 있으신가요?</p>
+                
+                <a href="/contact.html" class="btn btn-primary" style="display: inline-block; margin: 1.5rem 0;">문의하기</a>
+            </section>
+        </article>
+    </main>
 
-    <div class="about-section">
-        <h2>운영자 소개</h2>
-        <p>안녕하세요, BonghoLab을 운영하는 <strong>봉호</strong>입니다. IT와 생산성에 오랫동안 관심을 가져왔고, 직접 써보고 도움이 된 것들만 솔직하게 공유하고 있습니다. 좋은 툴과 정보가 더 많은 분들의 시간을 아껴줄 수 있다고 믿습니다.</p>
-    </div>
-
-    <div class="contact-box">
-        <h2>📬 문의 & 피드백</h2>
-        <p>콘텐츠 제안, 오류 제보, 협업 문의는 언제든 환영합니다.</p>
-        <a href="mailto:hyungho1644@gmail.com" class="btn">✉️ 이메일 보내기</a>
-    </div>
-
-</div>
-
-<footer class="site-footer">
-    <p>© 2026 BonghoLab &nbsp;|&nbsp;
-       <a href="about.html">소개</a> &nbsp;|&nbsp;
-       <a href="privacy.html">개인정보처리방침</a>
-    </p>
-</footer>
-
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>BonghoLab</h4>
+                    <p>생산성과 IT에 관한 실용적인 인사이트를 제공합니다.</p>
+                    <div class="social-links">
+                        <a href="https://twitter.com/bongholab" aria-label="Twitter">𝕏</a>
+                        <a href="https://github.com/bongholab" aria-label="GitHub">GitHub</a>
+                        <a href="https://linkedin.com/in/bongholab" aria-label="LinkedIn">LinkedIn</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>네비게이션</h4>
+                    <ul>
+                        <li><a href="/">블로그</a></li>
+                        <li><a href="/tools/timer.html">도구</a></li>
+                        <li><a href="/about.html">소개</a></li>
+                        <li><a href="/contact.html">연락</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>정책</h4>
+                    <ul>
+                        <li><a href="/privacy.html">개인정보처리방침</a></li>
+                        <li><a href="/terms.html">이용약관</a></li>
+                        <li><a href="/contact.html">연락처</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 BonghoLab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -3,188 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BonghoLab — 생산성과 IT 인사이트</title>
-    <meta name="description" content="뽀모도로 타이머, AI 활용법, 생산성 향상 팁을 다루는 IT 블로그. 무료 유틸리티 툴도 제공합니다.">
+    <meta name="description" content="BonghoLab은 AI, 생산성, 개발에 관한 실용적인 인사이트를 제공하는 기술 블로그입니다.">
+    <meta name="keywords" content="생산성, AI, 개발, 뽀모도로, 기술, 블로그">
     <meta property="og:title" content="BonghoLab — 생산성과 IT 인사이트">
-    <meta property="og:description" content="AI·생산성·개발 인사이트와 무료 유틸리티 툴을 한곳에서.">
+    <meta property="og:description" content="AI, 생산성, 개발에 관한 실용적인 인사이트와 무료 유틸리티 도구">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.bongholab.com">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- 애드센스 승인 후 아래 주석을 해제하고 ca-pub-XXXXX 를 본인 ID로 교체 -->
-    <!--
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXX"
-     crossorigin="anonymous"></script>
-    -->
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE">
+    
+    <title>BonghoLab — 생산성과 IT 인사이트</title>
+    <link rel="canonical" href="https://www.bongholab.com/">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
-<!-- ===== 네비게이션 ===== -->
-<nav class="navbar">
-    <div class="nav-inner">
-        <a href="index.html" class="nav-logo">Bongho<span>Lab</span></a>
-        <ul class="nav-menu">
-            <li><a href="index.html" class="active">블로그</a></li>
-            <li><a href="tools/timer.html">타이머</a></li>
-            <li><a href="about.html">소개</a></li>
-        </ul>
-    </div>
-</nav>
-
-<!-- ===== 히어로 ===== -->
-<section class="hero">
-    <h1>생산성과 IT,<br><em>제대로 파고들다</em></h1>
-    <p>AI 도구, 집중력 향상, 개발자 팁까지<br>바로 써먹을 수 있는 인사이트를 모았습니다.</p>
-    <div class="hero-btns">
-        <a href="#latest" class="btn">최신 글 보기</a>
-        <a href="tools/timer.html" class="btn-outline">⏱️ 뽀모도로 타이머</a>
-    </div>
-</section>
-
-<!-- ===== 광고 자리 (승인 전 숨김, 승인 후 활성화) ===== -->
-<!--
-<div class="container">
-    <div class="ad-slot">
-        <ins class="adsbygoogle" style="display:block"
-             data-ad-client="ca-pub-XXXXX"
-             data-ad-slot="XXXXXXXXXX"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-</div>
--->
-
-<!-- ===== 최신 블로그 글 ===== -->
-<div class="container" id="latest">
-    <div class="section-header">
-        <h2 class="section-title">최신 글</h2>
-    </div>
-    <div class="blog-grid">
-
-        <a href="blog/pomodoro-science.html" class="blog-card">
-            <div class="blog-card-thumb">⏱️</div>
-            <div class="blog-card-body">
-                <span class="tag">생산성</span>
-                <h3>뽀모도로 기법 완전 정복 — 25분이 최적인 과학적 이유</h3>
-                <p>뇌과학자들이 말하는 집중과 휴식의 황금비율. 25분 집중이 왜 효과적인지 연구 결과로 파헤칩니다.</p>
-                <div class="blog-card-meta">
-                    <span class="date">2026.05.05</span>
-                    <span class="tag">5분 읽기</span>
-                </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="logo">
+                    <span class="logo-mark">BL</span>
+                    <span class="logo-text">BonghoLab</span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="/">블로그</a></li>
+                    <li><a href="/tools/timer.html">도구</a></li>
+                    <li><a href="/about.html">소개</a></li>
+                    <li><a href="/contact.html">연락</a></li>
+                </ul>
             </div>
-        </a>
-
-        <a href="blog/white-noise-guide.html" class="blog-card">
-            <div class="blog-card-thumb">🎧</div>
-            <div class="blog-card-body">
-                <span class="tag">집중력</span>
-                <h3>백색소음 종류별 효과 비교 — 빗소리 vs 카페 소음 vs 파도 소리</h3>
-                <p>집중할 때 어떤 소리가 가장 효과적일까? 상황별 최적 백색소음을 추천합니다.</p>
-                <div class="blog-card-meta">
-                    <span class="date">2026.05.04</span>
-                    <span class="tag">4분 읽기</span>
-                </div>
-            </div>
-        </a>
-
-        <a href="blog/ai-tools-2026.html" class="blog-card">
-            <div class="blog-card-thumb">🤖</div>
-            <div class="blog-card-body">
-                <span class="tag">AI</span>
-                <h3>2026년 개발자 필수 AI 툴 총정리 — 실무에서 쓰는 것만</h3>
-                <p>GitHub Copilot, Claude, Cursor 등 실제로 업무 효율을 높여주는 AI 도구를 직접 써보고 비교했습니다.</p>
-                <div class="blog-card-meta">
-                    <span class="date">2026.05.03</span>
-                    <span class="tag">6분 읽기</span>
-                </div>
-            </div>
-        </a>
-
-        <a href="blog/focus-routine.html" class="blog-card">
-            <div class="blog-card-thumb">💡</div>
-            <div class="blog-card-body">
-                <span class="tag">생산성</span>
-                <h3>재택근무자를 위한 집중력 유지 5가지 루틴</h3>
-                <p>집에서도 사무실보다 더 집중할 수 있습니다. 실제로 효과를 본 루틴 5가지를 소개합니다.</p>
-                <div class="blog-card-meta">
-                    <span class="date">2026.05.02</span>
-                    <span class="tag">4분 읽기</span>
-                </div>
-            </div>
-        </a>
-
-        <a href="blog/chatgpt-prompts.html" class="blog-card">
-            <div class="blog-card-thumb">✍️</div>
-            <div class="blog-card-body">
-                <span class="tag">AI</span>
-                <h3>업무 효율 2배 올리는 ChatGPT 프롬프트 10개</h3>
-                <p>단순한 질문 대신 이렇게 써보세요. 실무에서 바로 복붙해서 쓸 수 있는 프롬프트 모음입니다.</p>
-                <div class="blog-card-meta">
-                    <span class="date">2026.05.01</span>
-                    <span class="tag">5분 읽기</span>
-                </div>
-            </div>
-        </a>
-
-        <a href="blog/free-productivity-apps.html" class="blog-card">
-            <div class="blog-card-thumb">📱</div>
-            <div class="blog-card-body">
-                <span class="tag">앱 추천</span>
-                <h3>무료로 쓸 수 있는 최고의 생산성 앱 7가지</h3>
-                <p>돈 한 푼 안 써도 됩니다. 실제로 매일 쓰고 있는 무료 생산성 앱 7개를 솔직하게 리뷰합니다.</p>
-                <div class="blog-card-meta">
-                    <span class="date">2026.04.30</span>
-                    <span class="tag">5분 읽기</span>
-                </div>
-            </div>
-        </a>
-
-    </div>
-</div>
-
-<!-- ===== 유틸리티 툴 섹션 ===== -->
-<div class="container">
-    <div class="section-header">
-        <h2 class="section-title">유틸리티 툴</h2>
-        <a href="tools/timer.html" class="see-all">전체 보기 →</a>
-    </div>
-    <div class="tools-row">
-        <a href="tools/timer.html" class="tool-card">
-            <div class="tool-icon">⏱️</div>
-            <div class="tool-info">
-                <h3>뽀모도로 타이머</h3>
-                <p>백색소음과 함께하는 프리미엄 집중 타이머</p>
-            </div>
-            <span class="tool-badge">무료</span>
-        </a>
-        <div class="tool-card" style="opacity:0.5; cursor:default;">
-            <div class="tool-icon">📝</div>
-            <div class="tool-info">
-                <h3>글자 수 세기</h3>
-                <p>공백 포함/제외 실시간 글자 수 계산</p>
-            </div>
-            <span class="tool-badge">예정</span>
         </div>
-        <div class="tool-card" style="opacity:0.5; cursor:default;">
-            <div class="tool-icon">📅</div>
-            <div class="tool-info">
-                <h3>디데이 계산기</h3>
-                <p>시험, 기념일, 프로젝트 마감일 카운트</p>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">생산성과 IT,<br><span class="gradient-text">제대로 파고들다</span></h1>
+                <p class="hero-subtitle">AI 도구, 집중력 향상, 개발자 팁까지 바로 써먹을 수 있는 인사이트를 모았습니다.</p>
+                
+                <div class="hero-cta">
+                    <a href="#blog-posts" class="btn btn-primary">최신 글 읽기</a>
+                    <a href="/tools/timer.html" class="btn btn-secondary">⏱️ 뽀모도로 타이머</a>
+                </div>
             </div>
-            <span class="tool-badge">예정</span>
         </div>
-    </div>
-</div>
+    </section>
 
-<!-- ===== 푸터 ===== -->
-<footer class="site-footer">
-    <p>© 2026 BonghoLab &nbsp;|&nbsp;
-       <a href="about.html">소개</a> &nbsp;|&nbsp;
-       <a href="privacy.html">개인정보처리방침</a>
-    </p>
-</footer>
+    <!-- Blog Posts Section -->
+    <section class="blog-section">
+        <div class="container">
+            <h2 id="blog-posts" class="section-title">최신 글</h2>
+            
+            <div class="blog-grid">
+                <!-- Blog Post Card 1 -->
+                <article class="blog-card">
+                    <div class="blog-meta">
+                        <span class="category-tag">생산성</span>
+                        <time datetime="2026-05-05">2026년 5월 5일</time>
+                    </div>
+                    <h3 class="blog-title">
+                        <a href="/blog/pomodoro-science.html">뽀모도로 기법 완전 정복 — 25분이 최적인 과학적 이유</a>
+                    </h3>
+                    <p class="blog-excerpt">뇌과학자들이 말하는 집중과 휴식의 황금비율. 25분 집중이 왜 효과적인지 연구 결과로 파헤칩니다.</p>
+                    <div class="blog-footer">
+                        <span class="read-time">5분 읽기</span>
+                        <a href="/blog/pomodoro-science.html" class="read-more">읽기 →</a>
+                    </div>
+                </article>
 
+                <!-- Blog Post Card 2 -->
+                <article class="blog-card">
+                    <div class="blog-meta">
+                        <span class="category-tag">집중력</span>
+                        <time datetime="2026-05-04">2026년 5월 4일</time>
+                    </div>
+                    <h3 class="blog-title">
+                        <a href="/blog/white-noise-guide.html">백색소음 종류별 효과 비교 — 빗소리 vs 카페 소음 vs 파도 소리</a>
+                    </h3>
+                    <p class="blog-excerpt">집중할 때 어떤 소리가 가장 효과적일까? 상황별 최적 백색소음을 추천합니다.</p>
+                    <div class="blog-footer">
+                        <span class="read-time">4분 읽기</span>
+                        <a href="/blog/white-noise-guide.html" class="read-more">읽기 →</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post Card 3 -->
+                <article class="blog-card">
+                    <div class="blog-meta">
+                        <span class="category-tag">AI</span>
+                        <time datetime="2026-05-03">2026년 5월 3일</time>
+                    </div>
+                    <h3 class="blog-title">
+                        <a href="/blog/ai-tools-2026.html">2026년 개발자 필수 AI 툴 총정리 — 실무에서 쓰는 것만</a>
+                    </h3>
+                    <p class="blog-excerpt">GitHub Copilot, Claude, Cursor 등 실제로 업무 효율을 높여주는 AI 도구를 직접 써보고 비교했습니다.</p>
+                    <div class="blog-footer">
+                        <span class="read-time">6분 읽기</span>
+                        <a href="/blog/ai-tools-2026.html" class="read-more">읽기 →</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post Card 4 -->
+                <article class="blog-card">
+                    <div class="blog-meta">
+                        <span class="category-tag">생산성</span>
+                        <time datetime="2026-05-02">2026년 5월 2일</time>
+                    </div>
+                    <h3 class="blog-title">
+                        <a href="/blog/focus-routine.html">재택근무자를 위한 집중력 유지 5가지 루틴</a>
+                    </h3>
+                    <p class="blog-excerpt">집에서도 사무실보다 더 집중할 수 있습니다. 실제로 효과를 본 루틴 5가지를 소개합니다.</p>
+                    <div class="blog-footer">
+                        <span class="read-time">4분 읽기</span>
+                        <a href="/blog/focus-routine.html" class="read-more">읽기 →</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post Card 5 -->
+                <article class="blog-card">
+                    <div class="blog-meta">
+                        <span class="category-tag">AI</span>
+                        <time datetime="2026-05-01">2026년 5월 1일</time>
+                    </div>
+                    <h3 class="blog-title">
+                        <a href="/blog/chatgpt-prompts.html">업무 효율 2배 올리는 ChatGPT 프롬프트 10개</a>
+                    </h3>
+                    <p class="blog-excerpt">단순한 질문 대신 이렇게 써보세요. 실무에서 바로 복붙해서 쓸 수 있는 프롬프트 모음입니다.</p>
+                    <div class="blog-footer">
+                        <span class="read-time">5분 읽기</span>
+                        <a href="/blog/chatgpt-prompts.html" class="read-more">읽기 →</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post Card 6 -->
+                <article class="blog-card">
+                    <div class="blog-meta">
+                        <span class="category-tag">앱 추천</span>
+                        <time datetime="2026-04-30">2026년 4월 30일</time>
+                    </div>
+                    <h3 class="blog-title">
+                        <a href="/blog/free-productivity-apps.html">무료로 쓸 수 있는 최고의 생산성 앱 7가지</a>
+                    </h3>
+                    <p class="blog-excerpt">돈 한 푼 안 써도 됩니다. 실제로 매일 쓰고 있는 무료 생산성 앱 7개를 솔직하게 리뷰합니다.</p>
+                    <div class="blog-footer">
+                        <span class="read-time">5분 읽기</span>
+                        <a href="/blog/free-productivity-apps.html" class="read-more">읽기 →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools-section">
+        <div class="container">
+            <h2 class="section-title">무료 유틸리티 도구</h2>
+            <p class="section-subtitle">당신의 생산성을 높이기 위한 실용적인 도구들</p>
+            
+            <div class="tools-grid">
+                <!-- Available Tool -->
+                <div class="tool-card available">
+                    <div class="tool-icon">⏱️</div>
+                    <h3>뽀모도로 타이머</h3>
+                    <p>백색소음과 함께하는 프리미엄 집중 타이머</p>
+                    <a href="/tools/timer.html" class="tool-link">사용하기 →</a>
+                </div>
+
+                <!-- Coming Soon Tools -->
+                <div class="tool-card coming-soon">
+                    <div class="tool-icon">📝</div>
+                    <h3>글자 수 세기</h3>
+                    <p>공백 포함/제외 실시간 글자 수 계산</p>
+                    <span class="coming-badge">2026년 6월 예정</span>
+                </div>
+
+                <div class="tool-card coming-soon">
+                    <div class="tool-icon">📅</div>
+                    <h3>디데이 계산기</h3>
+                    <p>시험, 기념일, 프로젝트 마감일 카운트</p>
+                    <span class="coming-badge">2026년 6월 예정</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>매주 새로운 인사이트를 받으세요</h2>
+                <p>생산성, AI, 개발 팁을 이메일로 직접 전달합니다</p>
+                
+                <form class="newsletter-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <input type="email" name="email" placeholder="당신의 이메일 주소" required>
+                    <button type="submit" class="btn btn-primary">구독하기</button>
+                </form>
+                <p class="newsletter-note">스팸은 보내지 않습니다. 언제든 구독 해제 가능합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>BonghoLab</h4>
+                    <p>생산성과 IT에 관한 실용적인 인사이트를 제공합니다.</p>
+                    <div class="social-links">
+                        <a href="https://twitter.com/bongholab" aria-label="Twitter">𝕏</a>
+                        <a href="https://github.com/bongholab" aria-label="GitHub">GitHub</a>
+                        <a href="https://linkedin.com/in/bongholab" aria-label="LinkedIn">LinkedIn</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>네비게이션</h4>
+                    <ul>
+                        <li><a href="/">블로그</a></li>
+                        <li><a href="/tools/timer.html">도구</a></li>
+                        <li><a href="/about.html">소개</a></li>
+                        <li><a href="/contact.html">연락</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>정책</h4>
+                    <ul>
+                        <li><a href="/privacy.html">개인정보처리방침</a></li>
+                        <li><a href="/terms.html">이용약관</a></li>
+                        <li><a href="/contact.html">연락처</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 BonghoLab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Analytics (나중에 추가) -->
+    <!-- 여기에 Google Analytics 코드가 들어갑니다 -->
+
+    <!-- Google AdSense (나중에 추가) -->
+    <!-- 여기에 Google AdSense 코드가 들어갑니다 -->
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "BonghoLab",
+        "url": "https://www.bongholab.com",
+        "description": "AI, 생산성, 개발에 관한 실용적인 인사이트와 무료 유틸리티 도구",
+        "creator": {
+            "@type": "Organization",
+            "name": "BonghoLab"
+        }
+    }
+    </script>
 </body>
 </html>
