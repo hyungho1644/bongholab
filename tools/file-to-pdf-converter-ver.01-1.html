@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파일을 PDF로 변환하기</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .upload-area {
+            border: 2px dashed #667eea;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            background: #f8f9ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .upload-area:hover {
+            background: #eff2ff;
+            border-color: #764ba2;
+        }
+
+        .upload-area.dragover {
+            background: #e8ebff;
+            border-color: #764ba2;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .upload-subtext {
+            font-size: 12px;
+            color: #999;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .file-list {
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .file-item {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideIn 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .file-item.deleted {
+            animation: slideOut 0.5s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideOut {
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+                height: 0;
+                margin-bottom: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        .file-size {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .file-status {
+            font-size: 12px;
+            color: #28a745;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .auto-delete-timer {
+            font-size: 11px;
+            color: #ff6b6b;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 10px;
+            margin-left: 10px;
+        }
+
+        .btn-remove {
+            background: #ff6b6b;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-remove:hover {
+            background: #ff5252;
+        }
+
+        .btn-remove:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .select-group {
+            flex: 1;
+        }
+
+        .select-group label {
+            display: block;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .status.loading {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+            display: block;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #0c5460;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .file-item.processing .progress-bar {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📄 PDF 변환기</h1>
+            <p>파일을 업로드하면 자동으로 PDF로 변환됩니다</p>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📁</div>
+            <div class="upload-text">파일을 여기에 드래그하거나 클릭하여 선택</div>
+            <div class="upload-subtext">지원: 이미지(JPG, PNG), 텍스트(TXT), HTML, 문서(DOC) 등</div>
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <div class="file-list" id="fileList">
+            <div class="empty-state">업로드된 파일이 없습니다</div>
+        </div>
+
+        <div class="controls">
+            <div class="select-group">
+                <label for="pageSize">페이지 크기</label>
+                <select id="pageSize">
+                    <option value="a4">A4</option>
+                    <option value="letter">Letter</option>
+                    <option value="a3">A3</option>
+                    <option value="a5">A5</option>
+                </select>
+            </div>
+            <div class="select-group">
+                <label for="orientation">방향</label>
+                <select id="orientation">
+                    <option value="portrait">세로</option>
+                    <option value="landscape">가로</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-secondary" id="clearBtn">초기화</button>
+            <button class="btn-primary" id="convertBtn" disabled>PDF로 변환</button>
+        </div>
+    </div>
+
+    <input type="file" id="fileInput" multiple accept="image/*,.txt,.html,.pdf,.doc,.docx">
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const convertBtn = document.getElementById('convertBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const statusDiv = document.getElementById('status');
+        const pageSizeSelect = document.getElementById('pageSize');
+        const orientationSelect = document.getElementById('orientation');
+
+        let files = [];
+        let deleteTimers = {};
+
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(newFiles) {
+            for (let file of newFiles) {
+                if (files.find(f => f.name === file.name && f.size === file.size)) {
+                    continue;
+                }
+                files.push({
+                    file: file,
+                    name: file.name,
+                    size: file.size,
+                    converted: false,
+                    id: Math.random().toString(36).substr(2, 9)
+                });
+            }
+            updateFileList();
+            updateButtons();
+        }
+
+        function updateFileList() {
+            if (files.length === 0) {
+                fileList.innerHTML = '<div class="empty-state">업로드된 파일이 없습니다</div>';
+                return;
+            }
+
+            fileList.innerHTML = files.map((fileObj, index) => `
+                <div class="file-item" id="file-${index}">
+                    <div class="file-info">
+                        <div class="file-name">${fileObj.name}</div>
+                        <div class="file-size">${formatFileSize(fileObj.size)}</div>
+                        ${fileObj.converted ? `
+                            <div class="file-status">✅ 변환 완료</div>
+                            <div class="auto-delete-timer" id="timer-${index}">자동 삭제: 3초 후</div>
+                        ` : ''}
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn-remove" onclick="removeFile(${index})" ${fileObj.converted ? 'disabled' : ''}>제거</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function removeFile(index) {
+            files.splice(index, 1);
+            clearTimeout(deleteTimers[index]);
+            delete deleteTimers[index];
+            updateFileList();
+            updateButtons();
+        }
+
+        function autoDeleteFile(index) {
+            let countdown = 3;
+
+            const updateTimer = () => {
+                countdown--;
+                const timerElement = document.getElementById(`timer-${index}`);
+                if (timerElement) {
+                    timerElement.textContent = `자동 삭제: ${countdown}초 후`;
+                }
+
+                if (countdown > 0) {
+                    deleteTimers[index] = setTimeout(updateTimer, 1000);
+                } else {
+                    deleteFileWithAnimation(index);
+                }
+            };
+
+            deleteTimers[index] = setTimeout(updateTimer, 1000);
+        }
+
+        function deleteFileWithAnimation(index) {
+            const fileItem = document.getElementById(`file-${index}`);
+            if (fileItem) {
+                fileItem.classList.add('deleted');
+                setTimeout(() => {
+                    if (index < files.length) {
+                        removeFile(index);
+                    }
+                }, 500);
+            }
+        }
+
+        function updateButtons() {
+            convertBtn.disabled = files.length === 0 || files.every(f => f.converted);
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        function showStatus(message, type) {
+            statusDiv.innerHTML = message;
+            statusDiv.className = `status ${type}`;
+            if (type !== 'loading') {
+                setTimeout(() => {
+                    statusDiv.className = 'status';
+                }, 5000);
+            }
+        }
+
+        async function convertToPDF() {
+            if (files.length === 0) return;
+
+            const pageSize = pageSizeSelect.value;
+            const orientation = orientationSelect.value;
+
+            for (let i = 0; i < files.length; i++) {
+                if (!files[i].converted) {
+                    await convertFile(files[i], i, pageSize, orientation);
+                }
+            }
+        }
+
+        async function convertFile(fileObj, index, pageSize, orientation) {
+            const fileItem = document.getElementById(`file-${index}`);
+            if (!fileItem) return;
+            
+            const progressFill = fileItem.querySelector('.progress-fill');
+            
+            try {
+                showStatus(`<span class="spinner"></span>${fileObj.name} 변환 중...`, 'loading');
+                fileItem.classList.add('processing');
+
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: orientation.charAt(0),
+                    unit: 'mm',
+                    format: pageSize.toUpperCase()
+                });
+
+                const file = fileObj.file;
+                const fileType = file.type;
+
+                if (fileType.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = async (e) => {
+                        try {
+                            const img = new Image();
+                            img.onload = () => {
+                                const pageWidth = pdf.internal.pageSize.getWidth();
+                                const pageHeight = pdf.internal.pageSize.getHeight();
+                                let width = pageWidth - 10;
+                                let height = (img.height / img.width) * width;
+
+                                if (height > pageHeight - 10) {
+                                    height = pageHeight - 10;
+                                    width = (img.width / img.height) * height;
+                                }
+
+                                const x = (pageWidth - width) / 2;
+                                const y = (pageHeight - height) / 2;
+
+                                pdf.addImage(e.target.result, 'PNG', x, y, width, height);
+                                downloadPDF(pdf, file.name, fileObj, index);
+                                fileItem.classList.remove('processing');
+                                progressFill.style.width = '100%';
+                            };
+                            img.src = e.target.result;
+                        } catch (error) {
+                            throw error;
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                } else if (fileType === 'text/plain' || fileType === 'text/html' || !fileType) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        try {
+                            const text = e.target.result;
+                            const lines = text.split('\n');
+                            let yPosition = 15;
+                            const pageHeight = pdf.internal.pageSize.getHeight();
+                            const pageWidth = pdf.internal.pageSize.getWidth();
+                            const margin = 10;
+                            const maxWidth = pageWidth - (margin * 2);
+
+                            pdf.setFontSize(11);
+                            pdf.setFont(undefined, 'normal');
+
+                            for (let line of lines) {
+                                if (yPosition > pageHeight - 15) {
+                                    pdf.addPage();
+                                    yPosition = 15;
+                                }
+                                const wrappedText = pdf.splitTextToSize(line || ' ', maxWidth);
+                                pdf.text(wrappedText, margin, yPosition);
+                                yPosition += wrappedText.length * 6;
+                            }
+
+                            downloadPDF(pdf, file.name, fileObj, index);
+                            fileItem.classList.remove('processing');
+                            progressFill.style.width = '100%';
+                        } catch (error) {
+                            throw error;
+                        }
+                    };
+                    reader.readAsText(file);
+                } else if (fileType === 'application/pdf') {
+                    const reader = new FileReader();
+                    reader.onload = async (e) => {
+                        try {
+                            const pdfDoc = await PDFLib.PDFDocument.load(e.target.result);
+                            const pdfBytes = await pdfDoc.save();
+                            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                            downloadPDFBlob(blob, file.name, fileObj, index);
+                            fileItem.classList.remove('processing');
+                            progressFill.style.width = '100%';
+                        } catch (error) {
+                            throw error;
+                        }
+                    };
+                    reader.readAsArrayBuffer(file);
+                } else {
+                    throw new Error(`지원하지 않는 파일 형식: ${fileType}`);
+                }
+            } catch (error) {
+                console.error('변환 오류:', error);
+                showStatus(`❌ 오류: ${error.message}`, 'error');
+                if (fileItem) fileItem.classList.remove('processing');
+            }
+        }
+
+        function downloadPDF(pdf, fileName, fileObj, index) {
+            const name = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+            pdf.save(`${name}.pdf`);
+            fileObj.converted = true;
+            updateFileList();
+            updateButtons();
+            showStatus(`✅ ${fileName} 변환 완료! 3초 후 자동 삭제됩니다.`, 'success');
+            autoDeleteFile(index);
+        }
+
+        function downloadPDFBlob(blob, fileName, fileObj, index) {
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(link);
+            fileObj.converted = true;
+            updateFileList();
+            updateButtons();
+            showStatus(`✅ ${fileName} 저장 완료! 3초 후 자동 삭제됩니다.`, 'success');
+            autoDeleteFile(index);
+        }
+
+        convertBtn.addEventListener('click', convertToPDF);
+
+        clearBtn.addEventListener('click', () => {
+            files = [];
+            Object.keys(deleteTimers).forEach(key => clearTimeout(deleteTimers[key]));
+            deleteTimers = {};
+            updateFileList();
+            updateButtons();
+            fileInput.value = '';
+            statusDiv.className = 'status';
+        });
+
+        updateButtons();
+    </script>
+</body>
+</html>
